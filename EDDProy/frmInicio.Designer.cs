@@ -34,21 +34,21 @@ namespace EDDemo
             this.pilasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.estructurasNoLibealesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.estructurasNoLinealesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.arbolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.estructurasLinealesToolStripMenuItem,
-            this.estructurasNoLibealesToolStripMenuItem});
+            this.estructurasNoLinealesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1367, 42);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(911, 30);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -59,52 +59,53 @@ namespace EDDemo
             this.colasToolStripMenuItem,
             this.listasToolStripMenuItem});
             this.estructurasLinealesToolStripMenuItem.Name = "estructurasLinealesToolStripMenuItem";
-            this.estructurasLinealesToolStripMenuItem.Size = new System.Drawing.Size(237, 38);
+            this.estructurasLinealesToolStripMenuItem.Size = new System.Drawing.Size(148, 28);
             this.estructurasLinealesToolStripMenuItem.Text = "Estructuras lineales";
             this.estructurasLinealesToolStripMenuItem.Click += new System.EventHandler(this.estructurasLinealesToolStripMenuItem_Click);
             // 
             // pilasToolStripMenuItem
             // 
             this.pilasToolStripMenuItem.Name = "pilasToolStripMenuItem";
-            this.pilasToolStripMenuItem.Size = new System.Drawing.Size(206, 44);
+            this.pilasToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
             this.pilasToolStripMenuItem.Text = "Pilas";
             this.pilasToolStripMenuItem.Click += new System.EventHandler(this.pilasToolStripMenuItem_Click);
             // 
             // colasToolStripMenuItem
             // 
             this.colasToolStripMenuItem.Name = "colasToolStripMenuItem";
-            this.colasToolStripMenuItem.Size = new System.Drawing.Size(206, 44);
+            this.colasToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
             this.colasToolStripMenuItem.Text = "Colas";
             // 
             // listasToolStripMenuItem
             // 
             this.listasToolStripMenuItem.Name = "listasToolStripMenuItem";
-            this.listasToolStripMenuItem.Size = new System.Drawing.Size(206, 44);
+            this.listasToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
             this.listasToolStripMenuItem.Text = "Listas";
             // 
-            // estructurasNoLibealesToolStripMenuItem
+            // estructurasNoLinealesToolStripMenuItem
             // 
-            this.estructurasNoLibealesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.estructurasNoLinealesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.arbolesToolStripMenuItem});
-            this.estructurasNoLibealesToolStripMenuItem.Name = "estructurasNoLibealesToolStripMenuItem";
-            this.estructurasNoLibealesToolStripMenuItem.Size = new System.Drawing.Size(272, 38);
-            this.estructurasNoLibealesToolStripMenuItem.Text = "Estructuras no libeales";
+            this.estructurasNoLinealesToolStripMenuItem.Name = "estructurasNoLinealesToolStripMenuItem";
+            this.estructurasNoLinealesToolStripMenuItem.Size = new System.Drawing.Size(169, 28);
+            this.estructurasNoLinealesToolStripMenuItem.Text = "Estructuras no lineales";
             // 
             // arbolesToolStripMenuItem
             // 
             this.arbolesToolStripMenuItem.Name = "arbolesToolStripMenuItem";
-            this.arbolesToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.arbolesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.arbolesToolStripMenuItem.Text = "Arboles";
             this.arbolesToolStripMenuItem.Click += new System.EventHandler(this.arbolesToolStripMenuItem_Click);
             // 
             // frmInicio
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1367, 818);
+            this.ClientSize = new System.Drawing.Size(911, 524);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmInicio";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.frmInicio_Load);
@@ -121,7 +122,7 @@ namespace EDDemo
         private System.Windows.Forms.ToolStripMenuItem pilasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem colasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem estructurasNoLibealesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem estructurasNoLinealesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem arbolesToolStripMenuItem;
     }
 }

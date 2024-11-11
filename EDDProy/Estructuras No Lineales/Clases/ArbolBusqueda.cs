@@ -136,16 +136,17 @@ namespace EDDemo.Estructuras_No_Lineales
                 return Busqueda(valor, nodo.Der);
             }
         }
+
         //Implementar Podar
         public void PodarArbol()
         {
             Raiz = null;
             strArbol = "";
             strRecorrido = "";
-            MessageBox.Show("El árbol ha sido podado.");
         }
+
         //Implementar Eliminar nodo predecesor
-        public NodoBinario EliminarNodoPredecesor(int valor, NodoBinario nodo)
+        public NodoBinario EliminarNodoPredecesor(ref NodoBinario nodo, int valor)
         {
             if (nodo == null)
             {
@@ -154,11 +155,11 @@ namespace EDDemo.Estructuras_No_Lineales
 
             if (valor < nodo.Dato)
             {
-                nodo.Izq = EliminarNodoPredecesor(valor, nodo.Izq);
+                nodo.Izq = EliminarNodoPredecesor(ref nodo.Izq, valor);
             }
             else if (valor > nodo.Dato)
             {
-                nodo.Der = EliminarNodoPredecesor(valor, nodo.Der);
+                nodo.Der = EliminarNodoPredecesor(ref nodo.Der, valor);
             }
             else
             {
@@ -173,7 +174,7 @@ namespace EDDemo.Estructuras_No_Lineales
 
                 NodoBinario predecesor = ObtenerMaximo(nodo.Izq);
                 nodo.Dato = predecesor.Dato;
-                nodo.Izq = EliminarNodoPredecesor(predecesor.Dato, nodo.Izq);
+                nodo.Izq = EliminarNodoPredecesor(ref nodo.Izq, predecesor.Dato);
             }
 
             return nodo;
@@ -188,8 +189,9 @@ namespace EDDemo.Estructuras_No_Lineales
 
             return nodo;
         }
-        //Implementar Eliminar nodo sucesor
-        public NodoBinario EliminarNodoSucesor(int valor, NodoBinario nodo)
+
+        // Implementar Eliminar nodo sucesor
+        public NodoBinario EliminarNodoSucesor(ref NodoBinario nodo, int valor)
         {
             if (nodo == null)
             {
@@ -198,11 +200,11 @@ namespace EDDemo.Estructuras_No_Lineales
 
             if (valor < nodo.Dato)
             {
-                nodo.Izq = EliminarNodoSucesor(valor, nodo.Izq);
+                nodo.Izq = EliminarNodoSucesor(ref nodo.Izq, valor);
             }
             else if (valor > nodo.Dato)
             {
-                nodo.Der = EliminarNodoSucesor(valor, nodo.Der);
+                nodo.Der = EliminarNodoSucesor(ref nodo.Der, valor);
             }
             else
             {
@@ -217,9 +219,8 @@ namespace EDDemo.Estructuras_No_Lineales
 
                 NodoBinario sucesor = ObtenerMinimo(nodo.Der);
                 nodo.Dato = sucesor.Dato;
-                nodo.Der = EliminarNodoSucesor(sucesor.Dato, nodo.Der);
+                nodo.Der = EliminarNodoSucesor(ref nodo.Der, sucesor.Dato);
             }
-
             return nodo;
         }
 
@@ -232,6 +233,8 @@ namespace EDDemo.Estructuras_No_Lineales
 
             return nodo;
         }
+
+
         //Implementar Recorrer árbol por niveles
         public void RecorridoPorNiveles()
         {
@@ -259,5 +262,97 @@ namespace EDDemo.Estructuras_No_Lineales
             }
         }
         //Implementar Altura del árbol
+        public int ObtenerAltura(NodoBinario nodo)
+        {
+            if (nodo == null)
+            {
+                return 0;
+            }
+
+            int alturaIzquierda = ObtenerAltura(nodo.Izq);
+            int alturaDerecha = ObtenerAltura(nodo.Der);
+
+            return Math.Max(alturaIzquierda, alturaDerecha) + 1;
+        }
+        //Implementar Conteo de hojas
+        public int ContarHojas(NodoBinario nodo)
+        {
+            if (nodo == null)
+            {
+                return 0;
+            }
+            if (nodo.Izq == null && nodo.Der == null)
+            {
+                return 1;
+            }
+            return ContarHojas(nodo.Izq) + ContarHojas(nodo.Der);
+        }
+        //Implementar Conteo de nodos
+        public int ContarNodos(NodoBinario nodo)
+        {
+            if (nodo == null)
+            {
+                return 0;
+            }
+            return 1 + ContarNodos(nodo.Izq) + ContarNodos(nodo.Der);
+        }
+        //Implementar Verificar si es un árbol binario completo
+        public bool EsCompleto(NodoBinario nodo)
+        {
+            if (nodo == null)
+            {
+                return true;
+            }
+
+            Queue<NodoBinario> cola = new Queue<NodoBinario>();
+            cola.Enqueue(nodo);
+            bool encontradoHueco = false;
+
+            while (cola.Count > 0)
+            {
+                NodoBinario actual = cola.Dequeue();
+
+                if (actual.Izq != null)
+                {
+                    if (encontradoHueco)
+                        return false;
+
+                    cola.Enqueue(actual.Izq);
+                }
+                else
+                {
+                    encontradoHueco = true;
+                }
+
+                if (actual.Der != null)
+                {
+                    if (encontradoHueco)
+                        return false;
+
+                    cola.Enqueue(actual.Der);
+                }
+                else
+                {
+                    encontradoHueco = true;
+                }
+            }
+
+            return true;
+        }
+        //Implementar Verificar si es un árbol binario lleno
+        public bool EsLleno(NodoBinario nodo)
+        {
+            if (nodo == null)
+            {
+                return true;
+            }
+
+            if ((nodo.Izq == null && nodo.Der != null) || (nodo.Izq != null && nodo.Der == null))
+            {
+                return false;
+            }
+
+            return EsLleno(nodo.Izq) && EsLleno(nodo.Der);
+        }
     }
 }

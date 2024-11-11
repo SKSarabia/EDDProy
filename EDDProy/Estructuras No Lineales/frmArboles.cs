@@ -190,5 +190,106 @@ namespace EDDemo.Estructuras_No_Lineales
                 MessageBox.Show($"El {valor} NO se encuentra en el árbol");
             }
         }
+
+        private void btnPodar_Click(object sender, EventArgs e)
+        {
+            // Llamamos a la función que poda el árbol
+            miArbol.PodarArbol();
+            // Limpiamos los cuadros de texto y etiquetas
+            txtArbol.Text = "";
+            txtDato.Text = "";
+            lblRecorridoPreOrden.Text = "";
+            lblRecorridoInOrden.Text = "";
+            lblRecorridoPostOrden.Text = "";
+            MessageBox.Show("El árbol ha sido podado.");
+        }
+
+        private void btnEliminarPredecesor_Click(object sender, EventArgs e)
+        {
+            // Obtenemos el valor a eliminar desde el cuadro de texto
+            int valor = int.Parse(txtDato.Text);
+            // Obtenemos la raíz del árbol actual
+            miRaiz = miArbol.RegresaRaiz();
+            // Limpiamos el cuadro de texto que muestra el árbol
+            txtArbol.Text = "";
+            // Llamamos a la función que elimina el nodo especificado usando el predecesor
+            miArbol.EliminarNodoPredecesor(ref miRaiz, valor);
+            // Actualizamos la vista del árbol en el cuadro de texto
+            miArbol.MuestraArbolAcostado(1, miRaiz);
+            txtArbol.Text = miArbol.strArbol;
+            txtDato.Text = "";
+            MessageBox.Show($"El nodo con el valor {valor} ha sido eliminado usando el predecesor.");
+        }
+
+        // Evento del botón "Eliminar Nodo (Sucesor)" para eliminar un nodo usando el sucesor
+        private void btnEliminarSucesor_Click(object sender, EventArgs e)
+        {
+            // Obtenemos el valor a eliminar desde el cuadro de texto
+            int valor = int.Parse(txtDato.Text);
+            // Obtenemos la raíz del árbol actual
+            miRaiz = miArbol.RegresaRaiz();
+            // Limpiamos el cuadro de texto que muestra el árbol
+            txtArbol.Text = "";
+            // Llamamos a la función que elimina el nodo especificado usando el sucesor
+            miArbol.EliminarNodoSucesor(ref miRaiz, valor);
+            // Actualizamos la vista del árbol en el cuadro de texto
+            miArbol.MuestraArbolAcostado(1, miRaiz);
+            txtArbol.Text = miArbol.strArbol;
+            txtDato.Text = "";
+            MessageBox.Show($"El nodo con el valor {valor} ha sido eliminado usando el sucesor.");
+        }
+
+        private void btnAltura_Click(object sender, EventArgs e)
+        {
+            // Llamamos a la función que obtiene la altura del árbol
+            int altura = miArbol.ObtenerAltura(miArbol.RegresaRaiz());
+            // Mostramos el resultado en un mensaje
+            MessageBox.Show($"La altura del árbol es: {altura}");
+        }
+
+        private void btnRecorrerNiveles_Click(object sender, EventArgs e)
+        {
+            // Obtenemos la raíz del árbol
+            miRaiz = miArbol.RegresaRaiz();
+            // Limpiamos la cadena del recorrido
+            miArbol.strRecorrido = "";
+            // Llamamos a la función que recorre el árbol por niveles
+            miArbol.RecorridoPorNiveles();
+            // Mostramos el resultado del recorrido por niveles en un MessageBox
+            MessageBox.Show($"Recorrido por niveles: {miArbol.strRecorrido}");
+        }
+
+        private void btnContarHojas_Click(object sender, EventArgs e)
+        {
+            // Llamamos a la función que cuenta las hojas del árbol
+            int hojas = miArbol.ContarHojas(miArbol.RegresaRaiz());
+            // Mostramos el resultado en un mensaje
+            MessageBox.Show($"El número de hojas en el árbol es: {hojas}");
+        }
+
+        private void btnContarNodos_Click(object sender, EventArgs e)
+        {
+            // Llamamos a la función que cuenta los nodos del árbol
+            int nodos = miArbol.ContarNodos(miArbol.RegresaRaiz());
+            // Mostramos el resultado en un mensaje
+            MessageBox.Show($"El número de nodos en el árbol es: {nodos}");
+        }
+
+        private void btnEsCompleto_Click(object sender, EventArgs e)
+        {
+            // Llamamos a la función que verifica si el árbol es completo
+            bool esCompleto = miArbol.EsCompleto(miArbol.RegresaRaiz());
+            // Mostramos el resultado en un mensaje
+            MessageBox.Show(esCompleto ? "El árbol es completo" : "El árbol no es completo");
+        }
+
+        private void btnEsLleno_Click(object sender, EventArgs e)
+        {
+            // Llamamos a la función que verifica si el árbol está lleno
+            bool esLleno = miArbol.EsLleno(miArbol.RegresaRaiz());
+            // Mostramos el resultado en un mensaje
+            MessageBox.Show(esLleno ? "El árbol está lleno" : "El árbol no está lleno");
+        }
+
     }
 }
