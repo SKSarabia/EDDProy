@@ -9,30 +9,31 @@ namespace EDDemo.Estructuras_No_Lineales.Clases
     public class Busqueda
     {
         // Búsqueda Secuencial
-        public bool BusquedaSecuencial(int[] array, int valor)
+        public int BusquedaSecuencial(int[] array, int valor)
         {
-            foreach (int elemento in array)
+            for (int i = 0; i < array.Length; i++)
             {
-                if (elemento == valor)
+                if (array[i] == valor)
                 {
-                    return true;
+                    return i; // Devuelve la posición del valor encontrado
                 }
             }
-            return false;
+            return -1; // No encontrado
         }
 
         // Búsqueda Binaria
-        public bool BusquedaBinaria(int[] array, int valor)
+        public int BusquedaBinaria(int[] array, int valor)
         {
             int izquierda = 0;
             int derecha = array.Length - 1;
+
             while (izquierda <= derecha)
             {
                 int medio = (izquierda + derecha) / 2;
 
                 if (array[medio] == valor)
                 {
-                    return true;
+                    return medio; // Devuelve la posición del valor encontrado
                 }
                 if (array[medio] < valor)
                 {
@@ -43,22 +44,23 @@ namespace EDDemo.Estructuras_No_Lineales.Clases
                     derecha = medio - 1;
                 }
             }
-            return false;
+            return -1; // No encontrado
         }
 
         // Búsqueda de Salto
-        public bool BusquedaSalto(int[] array, int valor)
+        public int BusquedaSalto(int[] array, int valor)
         {
             int n = array.Length;
             int paso = (int)Math.Floor(Math.Sqrt(n));
             int prev = 0;
+
             while (array[Math.Min(paso, n) - 1] < valor)
             {
                 prev = paso;
                 paso += (int)Math.Floor(Math.Sqrt(n));
                 if (prev >= n)
                 {
-                    return false;
+                    return -1; // No encontrado
                 }
             }
 
@@ -67,15 +69,16 @@ namespace EDDemo.Estructuras_No_Lineales.Clases
                 prev++;
                 if (prev == Math.Min(paso, n))
                 {
-                    return false;
+                    return -1; // No encontrado
                 }
             }
 
             if (array[prev] == valor)
             {
-                return true;
+                return prev; // Devuelve la posición del valor encontrado
             }
-            return false;
+
+            return -1; // No encontrado
         }
     }
 }

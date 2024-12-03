@@ -351,7 +351,7 @@ namespace EDDemo.Estructuras_No_Lineales
             // 
             this.btnEjecutar.Location = new System.Drawing.Point(939, 84);
             this.btnEjecutar.Name = "btnEjecutar";
-            this.btnEjecutar.Size = new System.Drawing.Size(75, 23);
+            this.btnEjecutar.Size = new System.Drawing.Size(83, 26);
             this.btnEjecutar.TabIndex = 28;
             this.btnEjecutar.Text = "Ejecutar";
             this.btnEjecutar.UseVisualStyleBackColor = true;

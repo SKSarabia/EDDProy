@@ -311,60 +311,88 @@ namespace EDDemo.Estructuras_No_Lineales
 
         private void btnEjecutar_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtDato.Text))
+            if (cmbBusqueda.SelectedItem != null)
             {
-                if (cmbBusqueda.SelectedItem != null)
+                if (!string.IsNullOrEmpty(txtDato.Text))
                 {
                     EjecutarBusqueda(cmbBusqueda.SelectedItem.ToString());
                 }
-                else if (cmbOrdenacion.SelectedItem != null)
-                {
-                    EjecutarOrdenacion(cmbOrdenacion.SelectedItem.ToString());
-                }
                 else
                 {
-                    MessageBox.Show("Seleccione una opción de búsqueda u ordenación.");
+                    MessageBox.Show("Ingrese un dato para buscar.");
                 }
+            }
+            else if (cmbOrdenacion.SelectedItem != null)
+            {
+                EjecutarOrdenacion(cmbOrdenacion.SelectedItem.ToString());
             }
             else
             {
-                MessageBox.Show("Ingrese un dato para buscar o ordenar.");
+                MessageBox.Show("Seleccione una opción de búsqueda u ordenación.");
             }
         }
+
 
         private void EjecutarBusqueda(string metodo)
         {
             int valor = int.Parse(txtDato.Text);
-            int[] array = miArbol.ConvertirArbolAArray(); // Convertir el árbol a un array
-            Busqueda busqueda = new Busqueda(); // Instancia de la clase Busqueda
-            bool encontrado = false;
+            Busqueda busqueda = new Busqueda();
+            int[] array = miArbol.ConvertirArbolAArray();
+            int posicion = -1;
 
             switch (metodo)
             {
                 case "Secuencial":
-                    encontrado = busqueda.BusquedaSecuencial(array, valor);
+                    posicion = busqueda.BusquedaSecuencial(array, valor);
                     break;
                 case "Binaria":
-                    encontrado = busqueda.BusquedaBinaria(array, valor);
+                    posicion = busqueda.BusquedaBinaria(array, valor);
                     break;
                 case "Salto":
-                    encontrado = busqueda.BusquedaSalto(array, valor);
+                    posicion = busqueda.BusquedaSalto(array, valor);
                     break;
                 default:
                     MessageBox.Show("Método de búsqueda no válido.");
                     return;
             }
 
-            MessageBox.Show(encontrado ? "Valor encontrado en el array" : "Valor no encontrado en el array");
-            // Reiniciar
-            cmbBusqueda.SelectedIndex = -1; 
+            if (posicion != -1)
+            {
+                // Encontrar el nodo en el árbol
+                NodoBinario nodoEncontrado = EncontrarNodo(miArbol.RegresaRaiz(), valor);
+                MessageBox.Show($"Valor {valor} encontrado en la posición {posicion} del array y en el nodo con valor: {nodoEncontrado.Dato}");
+            }
+            else
+            {
+                MessageBox.Show("Valor no encontrado en el árbol");
+            }
+
+            // Reiniciar los combobox
+            cmbBusqueda.SelectedIndex = -1;
             cmbOrdenacion.SelectedIndex = -1;
+        }
+
+        // Método para encontrar el nodo en el árbol
+        private NodoBinario EncontrarNodo(NodoBinario nodo, int valor)
+        {
+            if (nodo == null)
+                return null;
+
+            if (nodo.Dato == valor)
+                return nodo;
+
+            NodoBinario encontrado = EncontrarNodo(nodo.Izq, valor);
+            if (encontrado != null)
+                return encontrado;
+
+            return EncontrarNodo(nodo.Der, valor);
         }
 
         private void EjecutarOrdenacion(string metodo)
         {
             int[] array = miArbol.ConvertirArbolAArray();
-            Ordenacion ordenacion = new Ordenacion(); // Instancia de la clase Ordenacion
+            Ordenacion ordenacion = new Ordenacion(); 
+            var reloj = System.Diagnostics.Stopwatch.StartNew(); 
 
             switch (metodo)
             {
@@ -393,19 +421,14 @@ namespace EDDemo.Estructuras_No_Lineales
                     MessageBox.Show("Método de ordenación no válido.");
                     return;
             }
-
-            // Reconstruir el árbol con los elementos ordenados
-            miArbol = new ArbolBusqueda();
-            foreach (int dato in array)
-            {
-                miRaiz = miArbol.RegresaRaiz();
-                miArbol.InsertaNodo(dato, ref miRaiz);
-            }
-
-            // Mostrar el árbol ordenado
-            txtArbol.Text = string.Join(",", array);
-            // Reiniciar
-            cmbBusqueda.SelectedIndex = -1; 
+            // Mostramos mensajes y reiniciamos
+            reloj.Stop();
+            long tiempoEjecucion = reloj.ElapsedTicks;
+            double tiempoMs = (double)tiempoEjecucion / System.Diagnostics.Stopwatch.Frequency * 1000; // Convertimos ticks a milisegundos
+            MessageBox.Show($"Método de Ordenación: {metodo}\n" +
+                            $"Lista Ordenada: {string.Join(", ", array)}\n" +
+                            $"Tiempo de Ejecución: {tiempoMs:0.00000} ms");
+            cmbBusqueda.SelectedIndex = -1;
             cmbOrdenacion.SelectedIndex = -1;
         }
     }
