@@ -27,6 +27,7 @@ namespace EDDemo.Estructuras_No_Lineales
             else
                 return false;
         }
+
         public NodoBinario RegresaRaiz()
         {
             return Raiz;
@@ -50,14 +51,15 @@ namespace EDDemo.Estructuras_No_Lineales
             else if (Dato < Nodo.Dato)
                 InsertaNodo(Dato, ref Nodo.Izq);
             else if (Dato > Nodo.Dato)
-                InsertaNodo(Dato, ref Nodo.Der);          
+                InsertaNodo(Dato, ref Nodo.Der);
         }
-        public void MuestraArbolAcostado(int nivel, NodoBinario nodo )
+
+        public void MuestraArbolAcostado(int nivel, NodoBinario nodo)
         {
             if (nodo == null)
                 return;
             MuestraArbolAcostado(nivel + 1, nodo.Der);
-            for(int i=0; i<nivel; i++)
+            for (int i = 0; i < nivel; i++)
             {
                 strArbol = strArbol + "      ";
             }
@@ -65,7 +67,7 @@ namespace EDDemo.Estructuras_No_Lineales
             MuestraArbolAcostado(nivel + 1, nodo.Izq);
         }
 
-        public  String ToDot(NodoBinario nodo)
+        public String ToDot(NodoBinario nodo)
         {
             StringBuilder b = new StringBuilder();
             if (nodo.Izq != null)
@@ -90,7 +92,7 @@ namespace EDDemo.Estructuras_No_Lineales
             strRecorrido = strRecorrido + nodo.Dato + ", ";
             PreOrden(nodo.Izq);
             PreOrden(nodo.Der);
-            
+
             return;
         }
 
@@ -105,7 +107,8 @@ namespace EDDemo.Estructuras_No_Lineales
 
             return;
         }
-        public void PostOrden(NodoBinario nodo )
+
+        public void PostOrden(NodoBinario nodo)
         {
             if (nodo == null)
                 return;
@@ -116,7 +119,8 @@ namespace EDDemo.Estructuras_No_Lineales
 
             return;
         }
-        //Implementar Busqueda
+
+        // Implementar Busqueda
         public bool Busqueda(int valor, NodoBinario nodo)
         {
             if (nodo == null)
@@ -137,7 +141,7 @@ namespace EDDemo.Estructuras_No_Lineales
             }
         }
 
-        //Implementar Podar
+        // Implementar Podar
         public void PodarArbol()
         {
             Raiz = null;
@@ -145,7 +149,7 @@ namespace EDDemo.Estructuras_No_Lineales
             strRecorrido = "";
         }
 
-        //Implementar Eliminar nodo predecesor
+        // Implementar Eliminar nodo predecesor
         public NodoBinario EliminarNodoPredecesor(ref NodoBinario nodo, int valor)
         {
             if (nodo == null)
@@ -235,7 +239,7 @@ namespace EDDemo.Estructuras_No_Lineales
         }
 
 
-        //Implementar Recorrer árbol por niveles
+        // Implementar Recorrer árbol por niveles
         public void RecorridoPorNiveles()
         {
             if (Raiz == null)
@@ -261,7 +265,7 @@ namespace EDDemo.Estructuras_No_Lineales
                 }
             }
         }
-        //Implementar Altura del árbol
+        // Implementar Altura del árbol
         public int ObtenerAltura(NodoBinario nodo)
         {
             if (nodo == null)
@@ -274,7 +278,7 @@ namespace EDDemo.Estructuras_No_Lineales
 
             return Math.Max(alturaIzquierda, alturaDerecha) + 1;
         }
-        //Implementar Conteo de hojas
+        // Implementar Conteo de hojas
         public int ContarHojas(NodoBinario nodo)
         {
             if (nodo == null)
@@ -287,7 +291,7 @@ namespace EDDemo.Estructuras_No_Lineales
             }
             return ContarHojas(nodo.Izq) + ContarHojas(nodo.Der);
         }
-        //Implementar Conteo de nodos
+        // Implementar Conteo de nodos
         public int ContarNodos(NodoBinario nodo)
         {
             if (nodo == null)
@@ -296,7 +300,7 @@ namespace EDDemo.Estructuras_No_Lineales
             }
             return 1 + ContarNodos(nodo.Izq) + ContarNodos(nodo.Der);
         }
-        //Implementar Verificar si es un árbol binario completo
+        // Implementar Verificar si es un árbol binario completo
         public bool EsCompleto(NodoBinario nodo)
         {
             if (nodo == null)
@@ -315,7 +319,9 @@ namespace EDDemo.Estructuras_No_Lineales
                 if (actual.Izq != null)
                 {
                     if (encontradoHueco)
+                    {
                         return false;
+                    }
 
                     cola.Enqueue(actual.Izq);
                 }
@@ -327,7 +333,9 @@ namespace EDDemo.Estructuras_No_Lineales
                 if (actual.Der != null)
                 {
                     if (encontradoHueco)
+                    {
                         return false;
+                    }
 
                     cola.Enqueue(actual.Der);
                 }
@@ -339,7 +347,8 @@ namespace EDDemo.Estructuras_No_Lineales
 
             return true;
         }
-        //Implementar Verificar si es un árbol binario lleno
+
+        // Implementar Verificar si es un árbol binario lleno
         public bool EsLleno(NodoBinario nodo)
         {
             if (nodo == null)
@@ -353,6 +362,26 @@ namespace EDDemo.Estructuras_No_Lineales
             }
 
             return EsLleno(nodo.Izq) && EsLleno(nodo.Der);
+        }
+
+        // Método para convertir el árbol en un array
+        public int[] ConvertirArbolAArray()
+        {
+            List<int> lista = new List<int>();
+            PreOrdenLista(Raiz, lista);
+            return lista.ToArray();
+        }
+
+        private void PreOrdenLista(NodoBinario nodo, List<int> lista)
+        {
+            if (nodo == null)
+            {
+                return;
+            }
+
+            lista.Add(nodo.Dato);
+            PreOrdenLista(nodo.Izq, lista);
+            PreOrdenLista(nodo.Der, lista);
         }
     }
 }

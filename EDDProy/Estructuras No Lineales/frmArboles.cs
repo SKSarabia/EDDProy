@@ -1,4 +1,5 @@
 ﻿using EDDemo;
+using EDDemo.Estructuras_No_Lineales.Clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,6 @@ using System.Xml.Linq;
 //using GraphVizWrapper;
 //using GraphVizWrapper.Queries;
 //using GraphVizWrapper.Commands;
-
 //using csdot;
 //using csdot.Attributes.DataTypes;
 
@@ -31,6 +31,7 @@ namespace EDDemo.Estructuras_No_Lineales
             InitializeComponent();
             miArbol = new ArbolBusqueda();
             miRaiz = null;
+            InicializarCombobox();
         }
 
         private void btnInsertar_Click(object sender, EventArgs e)
@@ -291,5 +292,121 @@ namespace EDDemo.Estructuras_No_Lineales
             MessageBox.Show(esLleno ? "El árbol está lleno" : "El árbol no está lleno");
         }
 
+        private void InicializarCombobox()
+        {
+            // Inicializar opciones del ComboBox de Búsqueda
+            cmbBusqueda.Items.Add("Secuencial");
+            cmbBusqueda.Items.Add("Binaria");
+            cmbBusqueda.Items.Add("Salto");
+
+            // Inicializar opciones del ComboBox de Ordenación
+            cmbOrdenacion.Items.Add("Intercalación");
+            cmbOrdenacion.Items.Add("Shellsort");
+            cmbOrdenacion.Items.Add("Mezcla Natural");
+            cmbOrdenacion.Items.Add("Método Burbuja");
+            cmbOrdenacion.Items.Add("QuickSort");
+            cmbOrdenacion.Items.Add("Radix");
+            cmbOrdenacion.Items.Add("Mezcla Directa");
+        }
+
+        private void btnEjecutar_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtDato.Text))
+            {
+                if (cmbBusqueda.SelectedItem != null)
+                {
+                    EjecutarBusqueda(cmbBusqueda.SelectedItem.ToString());
+                }
+                else if (cmbOrdenacion.SelectedItem != null)
+                {
+                    EjecutarOrdenacion(cmbOrdenacion.SelectedItem.ToString());
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione una opción de búsqueda u ordenación.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ingrese un dato para buscar o ordenar.");
+            }
+        }
+
+        private void EjecutarBusqueda(string metodo)
+        {
+            int valor = int.Parse(txtDato.Text);
+            int[] array = miArbol.ConvertirArbolAArray(); // Convertir el árbol a un array
+            Busqueda busqueda = new Busqueda(); // Instancia de la clase Busqueda
+            bool encontrado = false;
+
+            switch (metodo)
+            {
+                case "Secuencial":
+                    encontrado = busqueda.BusquedaSecuencial(array, valor);
+                    break;
+                case "Binaria":
+                    encontrado = busqueda.BusquedaBinaria(array, valor);
+                    break;
+                case "Salto":
+                    encontrado = busqueda.BusquedaSalto(array, valor);
+                    break;
+                default:
+                    MessageBox.Show("Método de búsqueda no válido.");
+                    return;
+            }
+
+            MessageBox.Show(encontrado ? "Valor encontrado en el array" : "Valor no encontrado en el array");
+            // Reiniciar
+            cmbBusqueda.SelectedIndex = -1; 
+            cmbOrdenacion.SelectedIndex = -1;
+        }
+
+        private void EjecutarOrdenacion(string metodo)
+        {
+            int[] array = miArbol.ConvertirArbolAArray();
+            Ordenacion ordenacion = new Ordenacion(); // Instancia de la clase Ordenacion
+
+            switch (metodo)
+            {
+                case "Intercalación":
+                    array = ordenacion.Intercalacion(array, array);
+                    break;
+                case "Shellsort":
+                    ordenacion.Shellsort(array);
+                    break;
+                case "Mezcla Natural":
+                    array = ordenacion.MezclaNatural(array);
+                    break;
+                case "Método Burbuja":
+                    ordenacion.MetodoBurbuja(array);
+                    break;
+                case "QuickSort":
+                    ordenacion.QuickSort(array, 0, array.Length - 1);
+                    break;
+                case "Radix":
+                    ordenacion.RadixSort(array);
+                    break;
+                case "Mezcla Directa":
+                    ordenacion.MezclaDirecta(array);
+                    break;
+                default:
+                    MessageBox.Show("Método de ordenación no válido.");
+                    return;
+            }
+
+            // Reconstruir el árbol con los elementos ordenados
+            miArbol = new ArbolBusqueda();
+            foreach (int dato in array)
+            {
+                miRaiz = miArbol.RegresaRaiz();
+                miArbol.InsertaNodo(dato, ref miRaiz);
+            }
+
+            // Mostrar el árbol ordenado
+            txtArbol.Text = string.Join(",", array);
+            // Reiniciar
+            cmbBusqueda.SelectedIndex = -1; 
+            cmbOrdenacion.SelectedIndex = -1;
+        }
     }
 }

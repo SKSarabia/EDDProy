@@ -54,6 +54,9 @@ namespace EDDemo.Estructuras_No_Lineales
             this.btnContarNodos = new System.Windows.Forms.Button();
             this.btnEsCompleto = new System.Windows.Forms.Button();
             this.btnEsLleno = new System.Windows.Forms.Button();
+            this.cmbBusqueda = new System.Windows.Forms.ComboBox();
+            this.cmbOrdenacion = new System.Windows.Forms.ComboBox();
+            this.btnEjecutar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.txtNodos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,13 +91,13 @@ namespace EDDemo.Estructuras_No_Lineales
             this.txtArbol.Multiline = true;
             this.txtArbol.Name = "txtArbol";
             this.txtArbol.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtArbol.Size = new System.Drawing.Size(677, 370);
+            this.txtArbol.Size = new System.Drawing.Size(1026, 370);
             this.txtArbol.TabIndex = 2;
             // 
             // btnLimpiar
             // 
             this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLimpiar.Location = new System.Drawing.Point(554, 13);
+            this.btnLimpiar.Location = new System.Drawing.Point(579, 9);
             this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(83, 29);
@@ -106,7 +109,7 @@ namespace EDDemo.Estructuras_No_Lineales
             // btnGrafica
             // 
             this.btnGrafica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGrafica.Location = new System.Drawing.Point(554, 46);
+            this.btnGrafica.Location = new System.Drawing.Point(579, 59);
             this.btnGrafica.Margin = new System.Windows.Forms.Padding(2);
             this.btnGrafica.Name = "btnGrafica";
             this.btnGrafica.Size = new System.Drawing.Size(83, 29);
@@ -326,11 +329,42 @@ namespace EDDemo.Estructuras_No_Lineales
             this.btnEsLleno.UseVisualStyleBackColor = true;
             this.btnEsLleno.Click += new System.EventHandler(this.btnEsLleno_Click);
             // 
+            // cmbBusqueda
+            // 
+            this.cmbBusqueda.FormattingEnabled = true;
+            this.cmbBusqueda.Location = new System.Drawing.Point(799, 59);
+            this.cmbBusqueda.Name = "cmbBusqueda";
+            this.cmbBusqueda.Size = new System.Drawing.Size(121, 24);
+            this.cmbBusqueda.TabIndex = 26;
+            this.cmbBusqueda.Text = "Busqueda";
+            // 
+            // cmbOrdenacion
+            // 
+            this.cmbOrdenacion.FormattingEnabled = true;
+            this.cmbOrdenacion.Location = new System.Drawing.Point(799, 116);
+            this.cmbOrdenacion.Name = "cmbOrdenacion";
+            this.cmbOrdenacion.Size = new System.Drawing.Size(121, 24);
+            this.cmbOrdenacion.TabIndex = 27;
+            this.cmbOrdenacion.Text = "Ordenacion";
+            // 
+            // btnEjecutar
+            // 
+            this.btnEjecutar.Location = new System.Drawing.Point(939, 84);
+            this.btnEjecutar.Name = "btnEjecutar";
+            this.btnEjecutar.Size = new System.Drawing.Size(75, 23);
+            this.btnEjecutar.TabIndex = 28;
+            this.btnEjecutar.Text = "Ejecutar";
+            this.btnEjecutar.UseVisualStyleBackColor = true;
+            this.btnEjecutar.Click += new System.EventHandler(this.btnEjecutar_Click);
+            // 
             // frmArboles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 620);
+            this.ClientSize = new System.Drawing.Size(1034, 620);
+            this.Controls.Add(this.btnEjecutar);
+            this.Controls.Add(this.cmbOrdenacion);
+            this.Controls.Add(this.cmbBusqueda);
             this.Controls.Add(this.btnEsLleno);
             this.Controls.Add(this.btnEsCompleto);
             this.Controls.Add(this.btnContarNodos);
@@ -392,5 +426,8 @@ namespace EDDemo.Estructuras_No_Lineales
         private System.Windows.Forms.Button btnContarNodos;
         private System.Windows.Forms.Button btnEsCompleto;
         private System.Windows.Forms.Button btnEsLleno;
+        private System.Windows.Forms.ComboBox cmbBusqueda;
+        private System.Windows.Forms.ComboBox cmbOrdenacion;
+        private System.Windows.Forms.Button btnEjecutar;
     }
 }
